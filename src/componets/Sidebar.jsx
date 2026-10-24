@@ -1,0 +1,270 @@
+import { Box, Divider, Drawer, List, ListItemButton, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import {
+    Dashboard as DashboardIcon,
+    People,
+    MedicalServices,
+    CalendarMonth,
+    Medication,
+    Assessment,
+    Settings,
+    Logout,
+    Notifications,
+    Search,
+    MoreVert,
+    TrendingUp,
+    EventAvailable,
+    LocalHospital,
+    PersonAdd,
+} from "@mui/icons-material";
+import {
+    AppBar,
+    Avatar,
+    Badge,
+    Card,
+    CardContent,
+    CssBaseline,
+    IconButton,
+    ListItemIcon,
+    ListItemText,
+    Toolbar,
+    Grid,
+    Paper,
+    Chip,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Menu,
+    MenuItem,
+} from "@mui/material";
+
+import { Link } from 'react-router';
+
+const drawerWidth = 250;
+
+
+function Sidebar() {
+        const [mobileOpen, setMobileOpen] = useState(false);
+    
+       const menuItems = [
+    {
+        name: "Dashboard",
+        icon: <DashboardIcon />,
+    },
+    {
+        name: "Patients",
+        icon: <People />,
+        link:'/addPatient',
+    },
+    {
+        name: "Doctors",
+        icon: <MedicalServices />,
+    },
+    {
+        name: "Appointments",
+        icon: <CalendarMonth />,
+    },
+    {
+        name: "Prescriptions",
+        icon: <Medication />,
+    },
+    {
+        name: "Reports",
+        icon: <Assessment />,
+    },
+];
+
+        const drawer = (
+            <Box sx={{ height: "100%", bgcolor: "#111827", color: "white" }}>
+                {/* Logo */}
+                <Box
+                    sx={{
+                        height: 70,
+                        display: "flex",
+                        alignItems: "center",
+                        px: 3,
+                        gap: 1.5,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            width: 38,
+                            height: 38,
+                            borderRadius: 2,
+                            bgcolor: "#2563eb",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        <LocalHospital />
+                    </Box>
+    
+                    <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        sx={{ letterSpacing: 0.5 }}
+                    >
+                        MediCare
+                    </Typography>
+                </Box>
+    
+                <Divider sx={{ borderColor: "#374151" }} />
+    
+                {/* Main Menu */}
+                <Box sx={{ px: 1.5, py: 2 }}>
+                    <Typography
+                        variant="caption"
+                        sx={{
+                            color: "#9ca3af",
+                            px: 1.5,
+                            textTransform: "uppercase",
+                        }}
+                    >
+                        Main Menu
+                    </Typography>
+    
+                    <List>
+                        {menuItems.map((item, index) => (
+                                                        <Link to={item.link} underline="none">
+    
+                            <ListItemButton
+
+                                key={item.name}
+                                selected={index === 0}
+                                sx={{
+                                    borderRadius: 2,
+                                    mb: 0.5,
+                                    color: "#d1d5db",
+    
+                                    "&.Mui-selected": {
+                                        bgcolor: "#2563eb",
+                                        color: "white",
+    
+                                        "&:hover": {
+                                            bgcolor: "#1d4ed8",
+                                        },
+                                    },
+    
+                                    "&:hover": {
+                                        bgcolor: "#1f2937",
+                                    },
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        color: "inherit",
+                                        minWidth: 40,
+                                    }}
+                                >
+                                    {item.icon}
+                                </ListItemIcon>
+    
+                                <ListItemText primary={item.name} />
+                            </ListItemButton>
+                            </Link>
+                        ))}
+                    </List>
+                </Box>
+    
+                <Divider sx={{ borderColor: "#374151" }} />
+    
+                {/* Bottom Menu */}
+                <Box sx={{ px: 1.5, py: 2 }}>
+                    <List>
+                        <ListItemButton
+                            sx={{
+                                borderRadius: 2,
+                                color: "#d1d5db",
+                                "&:hover": {
+                                    bgcolor: "#1f2937",
+                                },
+                            }}
+                        >
+                            <ListItemIcon sx={{ color: "inherit", minWidth: 40 }}>
+                                <Settings />
+                            </ListItemIcon>
+    
+                            <ListItemText primary="Settings" />
+                        </ListItemButton>
+    
+                        <ListItemButton
+                            sx={{
+                                borderRadius: 2,
+                                color: "#f87171",
+                                "&:hover": {
+                                    bgcolor: "#1f2937",
+                                },
+                            }}
+                        >
+                            <ListItemIcon sx={{ color: "inherit", minWidth: 40 }}>
+                                <Logout />
+                            </ListItemIcon>
+    
+                            <ListItemText primary="Logout" />
+                        </ListItemButton>
+                    </List>
+                </Box>
+            </Box>
+        );
+ 
+  return (
+    <div>
+         <Box
+                component="nav"
+                sx={{
+                    width: {
+                        md: drawerWidth,
+                    },
+                    flexShrink: {
+                        md: 0,
+                    },
+                }}
+            >
+                <Drawer
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={() => setMobileOpen(false)}
+                    ModalProps={{
+                        keepMounted: true,
+                    }}
+                    sx={{
+                        display: {
+                            xs: "block",
+                            md: "none",
+                        },
+                        "& .MuiDrawer-paper": {
+                            width: drawerWidth,
+                            boxSizing: "border-box",
+                        },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+
+                <Drawer
+                    variant="permanent"
+                    sx={{
+                        display: {
+                            xs: "none",
+                            md: "block",
+                        },
+                        "& .MuiDrawer-paper": {
+                            width: drawerWidth,
+                            boxSizing: "border-box",
+                            border: "none",
+                        },
+                    }}
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+    </div>
+  )
+}
+
+export default Sidebar
