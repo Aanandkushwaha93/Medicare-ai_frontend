@@ -9,50 +9,28 @@ import {
     Assessment,
     Settings,
     Logout,
-    Notifications,
-    Search,
-    MoreVert,
-    TrendingUp,
-    EventAvailable,
-    LocalHospital,
-    PersonAdd,
+
 } from "@mui/icons-material";
+import { Link, useLocation } from "react-router";
 import {
-    AppBar,
-    Avatar,
-    Badge,
-    Card,
-    CardContent,
-    CssBaseline,
-    IconButton,
+   
     ListItemIcon,
     ListItemText,
-    Toolbar,
-    Grid,
-    Paper,
-    Chip,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Menu,
-    MenuItem,
+  
 } from "@mui/material";
 
-import { Link } from 'react-router';
 
 const drawerWidth = 250;
 
 
 function Sidebar() {
         const [mobileOpen, setMobileOpen] = useState(false);
-    
+    const location = useLocation();
        const menuItems = [
     {
         name: "Dashboard",
         icon: <DashboardIcon />,
+        link:'/dashboard',
     },
     {
         name: "Patients",
@@ -62,14 +40,18 @@ function Sidebar() {
     {
         name: "Doctors",
         icon: <MedicalServices />,
+        link:'/addDoctor',
+
     },
     {
         name: "Appointments",
         icon: <CalendarMonth />,
+        link:'/appointment',
     },
     {
         name: "Prescriptions",
         icon: <Medication />,
+        link:'/prescription',
     },
     {
         name: "Reports",
@@ -94,13 +76,14 @@ function Sidebar() {
                             width: 38,
                             height: 38,
                             borderRadius: 2,
-                            bgcolor: "#2563eb",
+                            bgcolor: "#ffffff",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                         }}
                     >
-                        <LocalHospital />
+                        {/* <LocalHospital /> */}
+                        <img src='/meidacare-ai-favicon.png' style={{width:'34px'}}/>
                     </Box>
     
                     <Typography
@@ -127,47 +110,45 @@ function Sidebar() {
                         Main Menu
                     </Typography>
     
-                    <List>
-                        {menuItems.map((item, index) => (
-                                                        <Link to={item.link} underline="none">
-    
-                            <ListItemButton
+                   <List>
+  {menuItems.map((item) => (
+    <ListItemButton
+      key={item.name}
+      component={Link}
+      to={item.link}
+      selected={location.pathname === item.link}
+      sx={{
+        borderRadius: 2,
+        mb: 0.5,
+        color: "#d1d5db",
 
-                                key={item.name}
-                                selected={index === 0}
-                                sx={{
-                                    borderRadius: 2,
-                                    mb: 0.5,
-                                    color: "#d1d5db",
-    
-                                    "&.Mui-selected": {
-                                        bgcolor: "#2563eb",
-                                        color: "white",
-    
-                                        "&:hover": {
-                                            bgcolor: "#1d4ed8",
-                                        },
-                                    },
-    
-                                    "&:hover": {
-                                        bgcolor: "#1f2937",
-                                    },
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        color: "inherit",
-                                        minWidth: 40,
-                                    }}
-                                >
-                                    {item.icon}
-                                </ListItemIcon>
-    
-                                <ListItemText primary={item.name} />
-                            </ListItemButton>
-                            </Link>
-                        ))}
-                    </List>
+        "&.Mui-selected": {
+          bgcolor: "#2563eb",
+          color: "#ffffff",
+
+          "&:hover": {
+            bgcolor: "#1d4ed8",
+          },
+        },
+
+        "&:hover": {
+          bgcolor: "#1f2937",
+        },
+      }}
+    >
+      <ListItemIcon
+        sx={{
+          color: "inherit",
+          minWidth: 40,
+        }}
+      >
+        {item.icon}
+      </ListItemIcon>
+
+      <ListItemText primary={item.name} />
+    </ListItemButton>
+  ))}
+</List>
                 </Box>
     
                 <Divider sx={{ borderColor: "#374151" }} />

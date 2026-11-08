@@ -87,20 +87,20 @@ const appointments = [
 ];
 
 function Dashboard() {
-    const navitage =useNavigate()
-   
+    const navitage = useNavigate()
 
-    
+
+
 
     return (
         <Box sx={{ display: "flex", bgcolor: "#f8fafc", minHeight: "100vh" }}>
             <CssBaseline />
 
             {/* Navbar */}
-            <Header/>
+            <Header />
 
             {/* Sidebar */}
-           <Sidebar/>
+            <Sidebar />
 
             {/* Main Content */}
             <Box
@@ -111,7 +111,7 @@ function Dashboard() {
                         xs: 2,
                         md: 4,
                     },
-                    mt: 8,
+                    mt: 6,
                     overflow: "hidden",
                 }}
             >
@@ -291,22 +291,25 @@ function Dashboard() {
                             <QuickAction
                                 icon={<PersonAdd />}
                                 title="Add Patient"
-                                route='addPatient'
+                                route='/addPatient'
                             />
 
                             <QuickAction
                                 icon={<EventAvailable />}
                                 title="Book Appointment"
+                                route='/appointment'
                             />
 
                             <QuickAction
                                 icon={<MedicalServices />}
                                 title="Add Doctor"
+                                route='/addDoctor'
                             />
 
                             <QuickAction
                                 icon={<Medication />}
                                 title="Create Prescription"
+                                route='/prescription'
                             />
                         </Paper>
                     </Grid>
@@ -498,7 +501,7 @@ function StatCard({ title, value, change, icon }) {
 /* Quick Action */
 function QuickAction({ icon, title, route }) {
     return (
-        <Link style={{ textDecoration: 'none' }} to={route}>
+        <Link style={{ textDecoration: 'none',color:'black' }} to={route}>
             <Box
                 sx={{
                     display: "flex",

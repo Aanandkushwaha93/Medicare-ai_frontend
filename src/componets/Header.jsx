@@ -50,94 +50,94 @@ import {
 const drawerWidth = 250;
 
 function Header() {
-     const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-  return (
-    <AppBar
-                position="fixed"
-                elevation={0}
-                sx={{
-                    width: {
-                        md: `calc(100% - ${drawerWidth}px)`,
-                    },
-                    ml: {
-                        md: `${drawerWidth}px`,
-                    },
-                    bgcolor: "white",
-                    color: "#111827",
-                    borderBottom: "1px solid #e5e7eb",
-                }}
-            >
-                <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <Typography
-                            variant="h6"
-                            fontWeight={700}
+    return (
+        <AppBar
+            position="fixed"
+            elevation={0}
+            sx={{
+                width: {
+                    md: `calc(100% - ${drawerWidth}px)`,
+                },
+                ml: {
+                    md: `${drawerWidth}px`,
+                },
+                bgcolor: "white",
+                color: "#111827",
+                borderBottom: "1px solid #e5e7eb",
+            }}
+        >
+            <Toolbar sx={{ justifyContent: "space-between" }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        sx={{
+                            display: {
+                                xs: "block",
+                                md: "none",
+                            },
+                        }}
+                    >
+                        MediCare
+                    </Typography>
+
+                    <Typography
+                        variant="h6"
+                        fontWeight={700}
+                        sx={{
+                            display: {
+                                xs: "none",
+                                md: "block",
+                            },
+                        }}
+                    >
+                        Dashboard
+                    </Typography>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <IconButton>
+                        <Search />
+                    </IconButton>
+
+                    <IconButton>
+                        <Badge badgeContent={4} color="error">
+                            <Notifications />
+                        </Badge>
+                    </IconButton>
+
+                    <IconButton onClick={handleMenu}>
+                        <Avatar
                             sx={{
-                                display: {
-                                    xs: "block",
-                                    md: "none",
-                                },
+                                width: 38,
+                                height: 38,
+                                bgcolor: "#2563eb",
                             }}
                         >
-                            MediCare
-                        </Typography>
+                            A
+                        </Avatar>
+                    </IconButton>
 
-                        <Typography
-                            variant="h6"
-                            fontWeight={700}
-                            sx={{
-                                display: {
-                                    xs: "none",
-                                    md: "block",
-                                },
-                            }}
-                        >
-                            Dashboard
-                        </Typography>
-                    </Box>
-
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                        <IconButton>
-                            <Search />
-                        </IconButton>
-
-                        <IconButton>
-                            <Badge badgeContent={4} color="error">
-                                <Notifications />
-                            </Badge>
-                        </IconButton>
-
-                        <IconButton onClick={handleMenu}>
-                            <Avatar
-                                sx={{
-                                    width: 38,
-                                    height: 38,
-                                    bgcolor: "#2563eb",
-                                }}
-                            >
-                                A
-                            </Avatar>
-                        </IconButton>
-
-                        <Menu
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>Settings</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-  )
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>Settings</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
+                </Box>
+            </Toolbar>
+        </AppBar>
+    )
 }
 
 export default Header

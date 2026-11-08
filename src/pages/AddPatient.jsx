@@ -26,6 +26,7 @@ import {
   RestartAlt,
 } from "@mui/icons-material";
 import Sidebar from "../componets/Sidebar";
+import Header from "../componets/Header";
 
 /* =========================================================
    ZOD SCHEMA
@@ -146,46 +147,46 @@ function AddPatient() {
      SUBMIT
   ======================================================= */
 
-const onSubmit = async (data) => {
-  try {
-    setServerError("");
-    setSuccessMessage("");
+  const onSubmit = async (data) => {
+    try {
+      setServerError("");
+      setSuccessMessage("");
 
-    const response = await fetch(
-      "http://localhost:2300/api/patients",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+      const response = await fetch(
+        "http://localhost:2300/api/patients",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await response.json();
+
+      // Check if API returned an error status
+      if (!response.ok) {
+        throw new Error(
+          result.message || "Failed to add patient."
+        );
       }
-    );
 
-    const result = await response.json();
+      console.log("Patient created:", result);
 
-    // Check if API returned an error status
-    if (!response.ok) {
-      throw new Error(
-        result.message || "Failed to add patient."
+      setSuccessMessage("Patient added successfully!");
+
+      // Clear all fields after successful API request
+      reset(defaultValues);
+    } catch (error) {
+      console.error("Add patient error:", error);
+
+      setServerError(
+        error.message ||
+        "Something went wrong while adding the patient."
       );
     }
-
-    console.log("Patient created:", result);
-
-    setSuccessMessage("Patient added successfully!");
-
-    // Clear all fields after successful API request
-    reset(defaultValues);
-  } catch (error) {
-    console.error("Add patient error:", error);
-
-    setServerError(
-      error.message ||
-        "Something went wrong while adding the patient."
-    );
-  }
-};
+  };
 
   /* =======================================================
      RESET
@@ -197,17 +198,27 @@ const onSubmit = async (data) => {
     setServerError("");
     setSuccessMessage("");
   };
+  const drawerWidth = 250;
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      {/* ===================================================
-          HEADER
-      =================================================== */}
-           <Sidebar/>
+
+      {/* Navbar */}
+      <Header />
+
+      {/* Sidebar */}
+      <Sidebar />
 
 
       <Box
         sx={{
+          width: {
+            md: `calc(100% - ${drawerWidth}px)`,
+          },
+          ml: {
+            md: `${drawerWidth}px`,
+          },
+          mt: 6,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -279,7 +290,14 @@ const onSubmit = async (data) => {
           FORM
       =================================================== */}
 
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{
+        width: {
+          md: `calc(100% - ${drawerWidth}px)`,
+        },
+        ml: {
+          md: `${drawerWidth}px`,
+        },
+      }}>
         {/* =================================================
             BASIC INFORMATION
         ================================================= */}
@@ -316,7 +334,7 @@ const onSubmit = async (data) => {
                   {...register("firstName")}
                   error={Boolean(errors.firstName)}
                   helperText={errors.firstName?.message}
-                  
+
                 />
               </Grid>
 
@@ -328,7 +346,7 @@ const onSubmit = async (data) => {
                   {...register("lastName")}
                   error={Boolean(errors.lastName)}
                   helperText={errors.lastName?.message}
-                  
+
                 />
               </Grid>
 
@@ -355,7 +373,7 @@ const onSubmit = async (data) => {
                   inputProps={{
                     maxLength: 10,
                   }}
-                  
+
                 />
               </Grid>
 
@@ -373,7 +391,7 @@ const onSubmit = async (data) => {
                       shrink: true,
                     },
                   }}
-                  
+
                 />
               </Grid>
 
@@ -387,7 +405,7 @@ const onSubmit = async (data) => {
                   {...register("gender")}
                   error={Boolean(errors.gender)}
                   helperText={errors.gender?.message}
-                  
+
                 >
                   <MenuItem value="Male">
                     Male
@@ -413,7 +431,7 @@ const onSubmit = async (data) => {
                   {...register("bloodGroup")}
                   error={Boolean(errors.bloodGroup)}
                   helperText={errors.bloodGroup?.message}
-                  
+
                 >
                   <MenuItem value="A+">A+</MenuItem>
                   <MenuItem value="A-">A-</MenuItem>
